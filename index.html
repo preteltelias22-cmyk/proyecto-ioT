@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Control Center & Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- ENCABEZADO TÉCNICO -->
+        <header class="main-header">
+            <div class="brand">
+                <span class="pulse-icon"></span>
+                <h1>IoT Home Core <span class="version">v2.1.0</span></h1>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator online">SYS_OK</span>
+                <span class="status-indicator protocol">ZIGBEE_READY</span>
+            </div>
+        </header>
+
+        <!-- PANEL DE NAVEGACIÓN SUPERIOR -->
+        <nav class="top-nav">
+            <button class="nav-btn active" data-target="intro">01. Introducción</button>
+            <button class="nav-btn" data-target="componentes">02. Componentes Clave</button>
+            <button class="nav-btn" data-target="protocolos">03. Protocolos</button>
+            <button class="nav-btn" data-target="energia">04. Gestión Energética</button>
+            <button class="nav-btn" data-target="seguridad">05. Seguridad</button>
+        </nav>
+
+        <div class="grid-layout">
+            
+            <!-- COLUNA IZQUIERDA: HARDWARE EN TIEMPO REAL (Fijo y decorativo) -->
+            <aside class="hardware-sidebar">
+                <h2 class="panel-title">Telemetría de Hardware</h2>
+                
+                <!-- Monitor de Energía -->
+                <div class="telemetry-widget border-green">
+                    <div class="widget-header">
+                        <span>SENSOR_POWER_NODE</span>
+                        <span class="badge">LIVE</span>
+                    </div>
+                    <div class="metrics-row">
+                        <div class="metric">
+                            <label>Climatización</label>
+                            <div id="live-temp" class="value text-green">-- °C</div>
+                        </div>
+                        <div class="metric">
+                            <label>Demanda Red</label>
+                            <div id="live-power" class="value text-green">-- kWh</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo de Seguridad -->
+                <div class="telemetry-widget border-red">
+                    <div class="widget-header">
+                        <span>ACTUATOR_LOCK_NODE</span>
+                    </div>
+                    <div class="control-row">
+                        <div>
+                            <label>Estado Seguro</label>
+                            <div id="lock-status" class="status-badge locked">CERRADO</div>
+                        </div>
+                        <button id="btn-lock" class="btn-action">Conmutar Relé</button>
+                    </div>
+                </div>
+
+                <!-- Log de Consola de Ingeniería -->
+                <div class="terminal-widget">
+                    <div class="terminal-header">Terminal de Eventos</div>
+                    <div id="terminal-log" class="terminal-body">
+                        <p class="log-init">[INIT] Inicializando periféricos...</p>
+                        <p class="log-init">[INIT] Protocolos Wi-Fi/Zigbee activos.</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- COLUNA DERECHA: PANELES DINÁMICOS DE INFORMACIÓN -->
+            <main class="content-viewport">
+                
+                <!-- SECCIÓN 1: INTRO -->
+                <section id="intro" class="content-section active-section">
+                    <span class="section-tag">Sección 01 // Marco Teórico</span>
+                    <h2>Automatización Residencial Inteligente</h2>
+                    <p class="lead-text">El Internet de las Cosas (IoT) ha revolucionado la forma en que las personas interactúan con sus hogares, permitiendo la creación de ambientes inteligentes capaces de optimizar el consumo energético, mejorar la seguridad y aumentar el confort <strong>(Condori & Teodor, 2019)</strong>.</p>
+                    <p>Gracias a la integración de sensores, microcontroladores, actuadores y plataformas en la nube, los hogares modernos pueden automatizar tareas y adaptarse a las necesidades de los usuarios en tiempo real <strong>(Muñoz, 2019)</strong>.</p>
+                    <p>Actualmente, la convergencia tecnológica entre IoT, inteligencia artificial y computación en la nube representa una de las principales tendencias en la automatización residencial <strong>(Batista et al., 2024)</strong>.</p>
+                </section>
+
+                <!-- SECCIÓN 2: COMPONENTES -->
+                <section id="componentes" class="content-section">
+                    <span class="section-tag">Sección 02 // Arquitectura</span>
+                    <h2>Componentes Clave de los Sistemas IoT</h2>
+                    <p>Los sistemas IoT en hogares inteligentes están compuestos principalmente por sensores, microcontroladores y actuadores <strong>(Pisano, 2018)</strong>.</p>
+                    
+                    <div class="tech-cards-grid">
+                        <div class="tech-card">
+                            <div class="card-num">01</div>
+                            <h3>Sensores</h3>
+                            <p>Recopilan información crítica del entorno físico, controlando variables como la temperatura, iluminación o detección de movimiento en áreas asignadas <strong>(Ochoa, 2024)</strong>.</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="card-num">02</div>
+                            <h3>Microcontroladores</h3>
+                            <p>Procesan de forma local las señales de entrada y administran las pilas de comunicación encargadas de enlazar el hardware con el ecosistema de red <strong>(Pisano, 2018)</strong>.</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="card-num">03</div>
+                            <h3>Actuadores</h3>
+                            <p>Ejecutan las acciones mecánicas o eléctricas calculadas por el sistema, tales como encender cargas de iluminación o modular la climatización <strong>(Pisano, 2018)</strong>.</p>
+                        </div>
+                    </div>
+                    <p>La integración de estos elementos ha permitido transformar las viviendas tradicionales en espacios dinámicos y adaptables <strong>(Castellano, 2022)</strong>.</p>
+                </section>
+
+                <!-- SECCIÓN 3: PROTOCOLOS -->
+                <section id="protocolos" class="content-section">
+                    <span class="section-tag">Sección 03 // Redes</span>
+                    <h2>Protocolos de Comunicación Inalámbrica</h2>
+                    <p>Los protocolos inalámbricos son fundamentales para la transmisión de datos entre dispositivos IoT <strong>(Pisano, 2018)</strong>. Garantizan la interoperabilidad y el funcionamiento coordinado de los sistemas inteligentes:</p>
+                    
+                    <div class="protocol-box-layout">
+                        <div class="proto-item">
+                            <h4>Wi-Fi</h4>
+                            <p>Destaca por su alta velocidad de transmisión y conectividad directa a Internet <strong>(Condori & Teodor, 2019)</strong>.</p>
+                        </div>
+                        <div class="proto-item">
+                            <h4>Bluetooth</h4>
+                            <p>Utilizado principalmente para conexiones de corto alcance y bajo consumo energético <strong>(Condori & Teodor, 2019)</strong>.</p>
+                        </div>
+                        <div class="proto-item">
+                            <h4>Zigbee</h4>
+                            <p>Permite la comunicación eficiente entre múltiples dispositivos dentro de una estructura de red en malla doméstica <strong>(Ochoa, 2024)</strong>.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4: ENERGÍA -->
+                <section id="energia" class="content-section">
+                    <span class="section-tag">Sección 04 // Sustentabilidad</span>
+                    <h2>Optimización del Consumo Energético</h2>
+                    <p>Las plataformas en la nube permiten recopilar y analizar información proveniente de sensores instalados en el hogar <strong>(Macías & Navia, 2025)</strong>. Gracias a ello, es posible identificar patrones de consumo energético y realizar ajustes automáticos que reduzcan el desperdicio de energía.</p>
+                    <p>Por ejemplo, los termostatos inteligentes pueden regular la temperatura de acuerdo con los hábitos de los usuarios y las condiciones climáticas <strong>(Macías & Navia, 2025)</strong>. Además, la integración con energías renovables, como paneles solares, favorece una gestión energética más sostenible <strong>(Batista et al., 2024)</strong>.</p>
+                </section>
+
+                <!-- SECCIÓN 5: SEGURIDAD -->
+                <section id="seguridad" class="content-section">
+                    <span class="section-tag">Sección 05 // Ciberseguridad</span>
+                    <h2>Seguridad en los Hogares Inteligentes</h2>
+                    <p>La seguridad es uno de los aspectos más importantes en los sistemas IoT <strong>(Pastaz & Tualombo, 2022)</strong>. Cámaras inteligentes, sensores de movimiento y cerraduras digitales permiten monitorear el hogar en tiempo real.</p>
+                    <p>Las plataformas en la nube utilizan algoritmos de aprendizaje automático para detectar actividades sospechosas y enviar alertas inmediatas a los propietarios <strong>(Pastaz & Tualombo, 2022)</strong>. Sin embargo, el crecimiento acelerado de los dispositivos conectados distribuidos incrementa también de forma crítica los vectores de ataque latentes sobre el sistema general.</p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
